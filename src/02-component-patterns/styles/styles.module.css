@@ -17,12 +17,13 @@
 
 .productDescription {
     margin: 10px;
-    /* position: relative;
+    position: relative;
     left: 0px;
     top: 100%;
     color: black;
     font-family: sans-serif;
-    font-size: 20px; */
+    font-size: 20px;
+    display: contents;
 }
 
 .buttonsContainer {
@@ -31,18 +32,17 @@
     flex-direction: row;
 }
 
-.buttonMinus:hover {
+.buttonMinus {
     cursor: pointer;
     background-color: transparent;
     border: 1px solid black;
     border-radius: 5px 0px 0px 5px;
     font-size: 20px;
     width: 30px;
-   
 }
 
 .buttonMinus:hover {
-    background-color: rgba(13, 215, 44, 0.629);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .countLabel {
@@ -53,7 +53,6 @@
     padding-top: 5px;
     text-align: center;
     width: 30px;
-
 }
 
 .buttonAdd {
