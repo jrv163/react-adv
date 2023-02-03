@@ -2,8 +2,8 @@
 import { useProduct } from '../hooks/useProduct';
 import styles from '../styles/styles.module.css';
 
-import { createContext, ReactElement } from 'react';
-import { onChangeArgs, Product, ProductContextProps } from '../interfaces/interfaces';
+import { createContext } from 'react';
+import { InitialValues, onChangeArgs, Product, ProductCardHandlers, ProductContextProps } from '../interfaces/interfaces';
 
 
 
@@ -12,18 +12,21 @@ const { Provider } = ProductContext;  // proveedor de información
 
 
 export interface Props {
+    //children?: ReactElement | ReactElement[];
+    children: ( args: ProductCardHandlers ) => JSX.Element;
     product: Product;
-    children?: ReactElement | ReactElement[];
     className?: string;
     style?: React.CSSProperties;
     onChange?: ( args: onChangeArgs ) => void; 
     value?: number;
+    initialValues?: InitialValues;
 }
  
 
-export const ProductCard = ({ children, product, className, style, onChange, value }: Props) => {
+export const ProductCard = ({ children, product, className, style, onChange, value, initialValues }: Props) => {
 
-    const { counter, increaseBy } = useProduct({ onChange, product, value }); 
+    const { counter, increaseBy, maxCount, isMaxCountReached, reset  } 
+    = useProduct({ onChange, product, value, initialValues }); 
 
 
   return (
@@ -32,13 +35,23 @@ export const ProductCard = ({ children, product, className, style, onChange, val
             <Provider value={{  // se necesita tiparlo, porque está como generico
                 counter,
                 increaseBy,
-                product
+                product,
+                maxCount
             }} >
                 {/* <img className={ styles.productImg } src="./coffee-mug.png" alt="coffe mug" /> */}
                 <div className={`${styles.productCard} ${ className } `}
                 style={ style }
                 >
-                { children }
+                { children({
+                    count: counter,
+                    isMaxCountReached,
+                    maxCount: initialValues?.maxCount,
+                    product,
+                    
+                    increaseBy,
+                    reset
+                }) 
+                }
 
                 {/* <ProductImage img={ product.img }/>
 
