@@ -19,10 +19,10 @@ export const ShoppingPage = () => {
               <ProductCard 
                 key={ product.id }
                 product={ product }
-                className="bg-dark"
+                
                 initialValues={{
                   count: 4,
-                  maxCount: 10,
+                  // maxCount: 10,
                 }}
               >
 
@@ -30,20 +30,11 @@ export const ShoppingPage = () => {
                   ({ reset, count,increaseBy, isMaxCountReached, maxCount, product }) => (
                     <>
                                    
-                      <ProductImage className='custom-image' style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
-                        <ProductTitle className='text-white' />
-                        <ProductButtons className='custom-buttons' />
+                      <ProductImage  />
+                        <ProductTitle />
+                        <ProductButtons />
 
-                        <button onClick={ reset } >Reset</button>
-                        <button onClick={ () => increaseBy(-2) } > -2 </button>
-                        {
-                          isMaxCountReached ? null
-                          : <button onClick={ () => increaseBy(+2) } > + 2 </button>
-                          
-                          // ( !isMaxCountReached && <button onClick={ () => increaseBy(+2) } > + 2 </button> )
-                        }
-                        
-                        <span>{count} - { maxCount }</span>
+                    
                     </>
                   )
                 }
